@@ -1,4 +1,4 @@
-glueSplit_clasp Lingeling Lingeling_druplig CCAnr+glucose Tuned
+CCAnr_glucose glueSplit_clasp Lingeling Lingeling_druplig Tuned
 0.12 0.13 0.11 0.15 0.14
 0.15 0.14 0.16 0.12 0.13
 0.14 0.11 0.14 0.12 0.13
