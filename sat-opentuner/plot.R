@@ -11,6 +11,8 @@ log_bst_12 <- read.table("12_all/logbest.txt",header=TRUE)
 
 old_benchmark <- read.table("benchmarks/old_benchmark.txt",header=TRUE)
 old_short_benchmark <- read.table("benchmarks/old_short_benchmark.txt",header=TRUE)
+real_benchmark <- read.table("benchmarks/benchmark_real/benchmark.txt",header=TRUE)
+real_short <- read.table("benchmarks/benchmark_real/benchmark_short.txt",header=TRUE)
 
 tuned_comparison24 <- read.table("24_short/comparison.txt",header=TRUE)
 
@@ -47,23 +49,39 @@ graph_old_short <- ggplot(data=melt(old_short_benchmark), aes(x=variable,y=value
     ylab("Execution Time (seconds)") +
     ggtitle("Execution Times Over 80 runs vs Solvers")
 
+graph_real_bench <- ggplot(data=melt(real_benchmark), aes(x=variable,y=value)) +
+    geom_boxplot(aes(fill=variable)) +
+    xlab("Solvers") +
+    ylab("Execution Time (seconds)") +
+    ggtitle("Execution Times Over 80 runs vs Solvers")
+
+graph_real_short <- ggplot(data=melt(real_short), aes(x=variable,y=value)) +
+    geom_boxplot(aes(fill=variable)) +
+    xlab("Solvers") +
+    ylab("Execution Time (seconds)") +
+    ggtitle("Execution Times Over 80 runs vs Solvers")
+
 graph_tuned_comparison24 <- ggplot(data=melt(tuned_comparison24), aes(x=variable,y=value)) +
     geom_boxplot(aes(fill=variable)) +
     xlab("Solvers") +
     ylab("Execution Time (seconds)") +
     ggtitle("Execution Times Over 80 runs vs Solvers")
 
-print(graph_all_24)
-readline("plot done\n")
-print(graph_bst_24)
-readline("plot done\n")
-print(graph_all_12)
-readline("plot done\n")
-print(graph_bst_12)
-readline("plot done\n")
-print(graph_old_bench)
-readline("plot done\n")
+#print(graph_all_24)
+#readline("plot done\n")
+#print(graph_bst_24)
+#readline("plot done\n")
+#print(graph_all_12)
+#readline("plot done\n")
+#print(graph_bst_12)
+#readline("plot done\n")
+#print(graph_old_bench)
+#readline("plot done\n")
 print(graph_old_short)
 readline("plot done\n")
-print(graph_tuned_comparison24)
+print(graph_real_bench)
 readline("plot done\n")
+print(graph_real_short)
+readline("plot done\n")
+#print(graph_tuned_comparison24)
+#readline("plot done\n")
