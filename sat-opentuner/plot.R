@@ -9,6 +9,9 @@ log_bst_24 <- read.table("24_short/logbest.txt",header=TRUE)
 log_all_12 <- read.table("12_all/logall.txt",header=TRUE)
 log_bst_12 <- read.table("12_all/logbest.txt",header=TRUE)
 
+log_all_12_headstart <- read.table("12_short_headstart/logall.txt",header=TRUE)
+log_bst_12_headstart <- read.table("12_short_headstart/logbest.txt",header=TRUE)
+
 old_benchmark <- read.table("benchmarks/old_benchmark.txt",header=TRUE)
 old_short_benchmark <- read.table("benchmarks/old_short_benchmark.txt",header=TRUE)
 real_benchmark <- read.table("benchmarks/benchmark_real/benchmark.txt",header=TRUE)
@@ -48,6 +51,20 @@ graph_bst_12 <- qplot(log_bst_12$tuning_time,log_bst_12$run_time,
 
 ggsave(file="log_bst_12.png",width=7,height=4,scale=2)
 
+graph_all_12_headstart <- qplot(log_all_12_headstart$tuning_time,log_all_12_headstart$run_time,data=log_all_12_headstart,
+                   ylab="Execution Time (seconds)",
+                   xlab="Tuning Time (seconds)", 
+                   main="Tuning Time (With Headstart, Only Best Solvers) vs. Execution Time over 12h (Measured by OpenTuner)")
+
+ggsave(file="log_all_12_headstart.png",width=7,height=4,scale=2)
+
+graph_bst_12_headstart <- qplot(log_bst_12_headstart$tuning_time,log_bst_12_headstart$run_time,
+                   geom=c("point","line"),
+                   ylab="Execution Time (seconds)",
+                   xlab="Tuning Time (seconds)",      
+                   main="Tuning Time (With Headstart, Only Best Solvers) vs. Best Execution Time over 12h (Measured by OpenTuner)")
+
+ggsave(file="log_bst_12_headstart.png",width=7,height=4,scale=2)
 graph_old_bench <- ggplot(data=melt(old_benchmark), aes(x=variable,y=value)) +
     geom_boxplot(aes(fill=variable)) +
     xlab("Solvers") +
