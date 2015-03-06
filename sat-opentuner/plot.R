@@ -3,24 +3,36 @@
 library(ggplot2)
 library(reshape2)
 
-log_all_24 <- read.table("24_short/logall.txt",header=TRUE)
-log_bst_24 <- read.table("24_short/logbest.txt",header=TRUE)
+#
+# Loading Files:
+#
+#log_all_24 <- read.table("24_short/logall.txt",header=TRUE)
+#log_bst_24 <- read.table("24_short/logbest.txt",header=TRUE)
+#
+#log_all_12 <- read.table("12_all/logall.txt",header=TRUE)
+#log_bst_12 <- read.table("12_all/logbest.txt",header=TRUE)
+#
+#log_all_12_headstart <- read.table("12_short_headstart/logall.txt",header=TRUE)
+#log_bst_12_headstart <- read.table("12_short_headstart/logbest.txt",header=TRUE)
+#
+#log_all_12_beststart <- read.table("12_short_beststart/logall.txt",header=TRUE)
+#log_bst_12_beststart <- read.table("12_short_beststart/logbest.txt",header=TRUE)
+#
+#old_benchmark <- read.table("benchmarks/old_benchmark.txt",header=TRUE)
+#old_short_benchmark <- read.table("benchmarks/old_short_benchmark.txt",header=TRUE)
+#
+#real_benchmark <- read.table("benchmarks/benchmark_real/benchmark.txt",header=TRUE)
+#real_short <- read.table("benchmarks/benchmark_real/benchmark_short.txt",header=TRUE)
+#
+#tuned_comparison24 <- read.table("24_short/comparison.txt",header=TRUE)
+#real_tuned_comparison24 <- read.table("24_short/real_comparison.txt",header=TRUE)
+#faster_tuned_comparison24 <- read.table("24_short/faster_comparison.txt",header=TRUE)
+#
+#headstart_comparison12 <- read.table("benchmarks/headstart_benchmark_comparison.txt",header=TRUE)
 
-log_all_12 <- read.table("12_all/logall.txt",header=TRUE)
-log_bst_12 <- read.table("12_all/logbest.txt",header=TRUE)
-
-log_all_12_headstart <- read.table("12_short_headstart/logall.txt",header=TRUE)
-log_bst_12_headstart <- read.table("12_short_headstart/logbest.txt",header=TRUE)
-
-old_benchmark <- read.table("benchmarks/old_benchmark.txt",header=TRUE)
-old_short_benchmark <- read.table("benchmarks/old_short_benchmark.txt",header=TRUE)
-real_benchmark <- read.table("benchmarks/benchmark_real/benchmark.txt",header=TRUE)
-real_short <- read.table("benchmarks/benchmark_real/benchmark_short.txt",header=TRUE)
-
-tuned_comparison24 <- read.table("24_short/comparison.txt",header=TRUE)
-real_tuned_comparison24 <- read.table("24_short/real_comparison.txt",header=TRUE)
-faster_tuned_comparison24 <- read.table("24_short/faster_comparison.txt",header=TRUE)
-
+#
+# Uncomment to generate all files.
+#
 graph_all_24 <- qplot(log_all_24$tuning_time,log_all_24$run_time,data=log_all_24,
                    ylab="Execution Time (seconds)",
                    xlab="Tuning Time (seconds)", 
@@ -65,6 +77,22 @@ graph_bst_12_headstart <- qplot(log_bst_12_headstart$tuning_time,log_bst_12_head
                    main="Tuning Time (With Headstart, Only Best Solvers) vs. Best Execution Time over 12h (Measured by OpenTuner)")
 
 ggsave(file="log_bst_12_headstart.png",width=7,height=4,scale=2)
+
+graph_all_12_beststart <- qplot(log_all_12_beststart$tuning_time,log_all_12_beststart$run_time,data=log_all_12_beststart,
+                   ylab="Execution Time (seconds)",
+                   xlab="Tuning Time (seconds)", 
+                   main="Tuning Time (With Beststart, Only Best Solvers) vs. Execution Time over 12h (Measured by OpenTuner)")
+
+ggsave(file="log_all_12_beststart.png",width=7,height=4,scale=2)
+
+graph_bst_12_beststart <- qplot(log_bst_12_beststart$tuning_time,log_bst_12_beststart$run_time,
+                   geom=c("point","line"),
+                   ylab="Execution Time (seconds)",
+                   xlab="Tuning Time (seconds)",      
+                   main="Tuning Time (With Beststart, Only Best Solvers) vs. Best Execution Time over 12h (Measured by OpenTuner)")
+
+ggsave(file="log_bst_12_beststart.png",width=7,height=4,scale=2)
+
 graph_old_bench <- ggplot(data=melt(old_benchmark), aes(x=variable,y=value)) +
     geom_boxplot(aes(fill=variable)) +
     xlab("Solvers") +
@@ -120,6 +148,14 @@ graph_faster_comparison24 <- ggplot(data=melt(faster_tuned_comparison24), aes(x=
     ggtitle("Execution Times Over 80 runs (24h) vs Best Solvers (/usr/bin/time: real)")
 
 ggsave(file="faster_real_tuned_comparison_24.png",width=7,height=4,scale=2)
+
+graph_headstart_comparison12 <- ggplot(data=melt(headstart_comparison12), aes(x=variable,y=value)) +
+    geom_boxplot(aes(fill=variable)) +
+    xlab("Solvers") +
+    ylab("Execution Time (seconds)") +
+    ggtitle("Execution Times Over 80 runs (12h) vs Best Solvers (/usr/bin/time: real)")
+
+ggsave(file="headstart_comparison_24.png",width=7,height=4,scale=2)
 
 #
 # Uncomment for visualization in R interpreter.
