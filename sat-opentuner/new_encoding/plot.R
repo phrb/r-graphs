@@ -9,7 +9,7 @@ library(reshape2)
 #brute_force <- read.table("brute-force/benchmark_0.txt", header=TRUE)
 #
 
-all <- read.table("benchmark_all.txt", header=TRUE)
+all <- read.table("sat_lib_harder_benchmark/all.txt", header=TRUE)
 
 #
 # Generate all files.
