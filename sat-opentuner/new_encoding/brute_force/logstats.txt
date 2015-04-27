@@ -1,0 +1,2 @@
+Total Run Time: 833.912204981
+Best Combination Total Time = 0.644887048006
