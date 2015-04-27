@@ -10,6 +10,7 @@ library(reshape2)
 #
 
 all <- read.table("sat_lib_harder_benchmark/all.txt", header=TRUE)
+brute_benchmark <- read.table("brute-force/brute_force_comparison.txt", header=TRUE)
 
 #
 # Generate all files.
@@ -27,13 +28,25 @@ all <- read.table("sat_lib_harder_benchmark/all.txt", header=TRUE)
 #    geom_boxplot() +
 #    stat_summary(fun.y=mean, geom="point", shape=4, size=4)
 
-all_graph <- ggplot(data=melt(all), aes(x=variable,y=value)) +
-    geom_boxplot(aes(fill=variable)) +
-    guides(fill=FALSE) +
-    stat_summary(fun.y=mean, geom="point", shape=4, size=4) +
-    xlab("Solutions") +
+all_graph <- ggplot(data=melt(all), aes(x=variable,y=value,colour=variable,fill=variable)) +
+    stat_summary(fun.y=mean, geom="point") +
+    stat_summary(fun.data=mean_cl_normal, position=position_dodge(width=0.95), geom="errorbar", aes(width=0.2)) +
+    theme(axis.text.x=element_blank()) +
+    guides(colour=guide_legend(title="Solvers")) +
+    guides(fill=guide_legend(title="Solvers")) +
+    xlab("Individual Solvers") +
     ylab("Execution Time (seconds)") +
-    ggtitle("Execution Times Over 20 runs of Different Solutions")
+    ggtitle("Benchmark of Individual Solvers, 100 instances and 30 runs")
+
+brute_benchmark_graph <- ggplot(data=melt(brute_benchmark), aes(x=variable,y=value,colour=variable,fill=variable)) +
+    stat_summary(fun.y=mean, geom="point") +
+    stat_summary(fun.data=mean_cl_normal, position=position_dodge(width=0.95), geom="errorbar", aes(width=0.2)) +
+    theme(axis.text.x=element_blank()) +
+    guides(colour=guide_legend(title="Solvers")) +
+    guides(fill=guide_legend(title="Solvers")) +
+    xlab("Individual Solvers") +
+    ylab("Execution Time (seconds)") +
+    ggtitle("Benchmark of Individual Solvers, 100 instances and 30 runs")
 
 # Uncomment for visualization in R interpreter.
 #
