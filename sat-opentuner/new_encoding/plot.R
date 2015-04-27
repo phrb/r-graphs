@@ -31,22 +31,24 @@ brute_benchmark <- read.table("brute-force/brute_force_comparison.txt", header=T
 all_graph <- ggplot(data=melt(all), aes(x=variable,y=value,colour=variable,fill=variable)) +
     stat_summary(fun.y=mean, geom="point") +
     stat_summary(fun.data=mean_cl_normal, position=position_dodge(width=0.95), geom="errorbar", aes(width=0.2)) +
-    theme(axis.text.x=element_blank()) +
+#    theme(axis.text.x=element_blank()) +
     guides(colour=guide_legend(title="Solvers")) +
     guides(fill=guide_legend(title="Solvers")) +
     xlab("Individual Solvers") +
     ylab("Execution Time (seconds)") +
-    ggtitle("Benchmark of Individual Solvers, 100 instances and 30 runs")
+    ggtitle("Benchmark of Individual Solvers, 100 instances and 30 runs") +
+    coord_flip()
 
 brute_benchmark_graph <- ggplot(data=melt(brute_benchmark), aes(x=variable,y=value,colour=variable,fill=variable)) +
     stat_summary(fun.y=mean, geom="point") +
     stat_summary(fun.data=mean_cl_normal, position=position_dodge(width=0.95), geom="errorbar", aes(width=0.2)) +
-    theme(axis.text.x=element_blank()) +
+#    theme(axis.text.x=element_blank()) +
     guides(colour=guide_legend(title="Solvers")) +
     guides(fill=guide_legend(title="Solvers")) +
     xlab("Individual Solvers") +
     ylab("Execution Time (seconds)") +
-    ggtitle("Benchmark of Individual Solvers, 100 instances and 30 runs")
+    ggtitle("Benchmark of Individual Solvers, 100 instances and 30 runs") +
+    coord_flip()
 
 # Uncomment for visualization in R interpreter.
 #
@@ -54,6 +56,8 @@ brute_benchmark_graph <- ggplot(data=melt(brute_benchmark), aes(x=variable,y=val
 #readline("plot done\n")
 #
 print(all_graph)
+readline("plot done\n")
+print(brute_benchmark_graph)
 readline("plot done\n")
 #
 #
