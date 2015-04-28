@@ -12,6 +12,9 @@ library(reshape2)
 all <- read.table("sat_lib_harder_benchmark/all.txt", header=TRUE)
 brute_benchmark <- read.table("brute-force/brute_force_comparison.txt", header=TRUE)
 
+benchmark_180s <- read.table("benchmark_180s.txt", header=TRUE)
+benchmark_840s <- read.table("benchmark_840s.txt", header=TRUE)
+
 #
 # Generate all files.
 #
@@ -50,6 +53,28 @@ brute_benchmark_graph <- ggplot(data=melt(brute_benchmark), aes(x=variable,y=val
     ggtitle("Benchmark of Individual Solvers, 100 instances and 30 runs") +
     coord_flip()
 
+benchmark_180s_graph <- ggplot(data=melt(benchmark_180s), aes(x=variable,y=value,colour=variable)) +
+    stat_summary(fun.y=mean, geom="point") +
+    stat_summary(fun.data=mean_cl_normal, position=position_dodge(width=0.95), geom="errorbar", aes(width=0.2)) +
+    guides(colour=guide_legend(title="Number of Subdivisions")) +
+    scale_colour_discrete(labels=c("4 Chunks (Only MinisatBLBD!)","20 Chunks", "50 Chunks", "100 Chunks")) +
+    scale_x_discrete(labels=c("4 Chunks","20 Chunks", "50 Chunks", "100 Chunks")) +
+    xlab("Different Subdivisions of the Input Set") +
+    ylab("Execution Time of the Combination (seconds)") +
+    ggtitle("Benchmark Tuned Combinations after Tuning for 180 seconds, 40 runs") +
+    coord_flip()
+
+benchmark_840s_graph <- ggplot(data=melt(benchmark_840s), aes(x=variable,y=value,colour=variable)) +
+    stat_summary(fun.y=mean, geom="point") +
+    stat_summary(fun.data=mean_cl_normal, position=position_dodge(width=0.95), geom="errorbar", aes(width=0.2)) +
+    guides(colour=guide_legend(title="Number of Subdivisions")) +
+    scale_colour_discrete(labels=c("20 Chunks", "50 Chunks")) +
+    scale_x_discrete(labels=c("20 Chunks", "50 Chunks")) +
+    xlab("Different Subdivisions of the Input Set") +
+    ylab("Execution Time of the Combination (seconds)") +
+    ggtitle("Benchmark Tuned Combinations after Tuning for 180 seconds, 40 runs") +
+    coord_flip()
+
 # Uncomment for visualization in R interpreter.
 #
 #print(brute_graph)
@@ -58,6 +83,10 @@ brute_benchmark_graph <- ggplot(data=melt(brute_benchmark), aes(x=variable,y=val
 print(all_graph)
 readline("plot done\n")
 print(brute_benchmark_graph)
+readline("plot done\n")
+print(benchmark_180s_graph)
+readline("plot done\n")
+print(benchmark_840s_graph)
 readline("plot done\n")
 #
 #
