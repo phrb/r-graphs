@@ -1,0 +1,1 @@
+python ../../../combinator.py -f sets/instance_set_6.txt -id instances/sat_lib_harder/ --solver-config 4 4 4 4 4 4 1 1 1 1 1 5 5 5 5 5 0 0 0 0 0 5 5 5 5 5 1 1 1 1 1 6 6 6 6 6 2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 4 4 4 4 4 5 5 5 5 5 4 4 4 4 4 5 5 5 5 5 4 4 4 4 4 5 5 5 5 5 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
