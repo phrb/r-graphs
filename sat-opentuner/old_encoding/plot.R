@@ -41,8 +41,12 @@ log_all_24 <- read.table("24_short/logall.txt",header=TRUE)
 #ggsave(file="log_all_24.png",width=7,height=4,scale=2)
 
 graph_all_24_2 <- ggplot(log_all_24, aes(tuning_time, run_time)) +
+                    xlab("Tuning Time (seconds)") +
+                    ylab("Execution Time (seconds)") +
+                    ggtitle("Tuning for 24h: All Combinations Tested") +
                     geom_point(aes(colour=run_time)) +
                     scale_colour_gradientn(colours=rainbow(3))
+
 ggsave(file="log_all_24_2.png",width=7,height=4,scale=2)
 
 #graph_bst_24 <- qplot(log_bst_24$tuning_time,log_bst_24$run_time,
