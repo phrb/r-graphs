@@ -9,8 +9,8 @@ library(reshape2)
 #brute_force <- read.table("brute-force/benchmark_0.txt", header=TRUE)
 #
 
-all <- read.table("sat_lib_harder_benchmark/all.txt", header=TRUE)
-brute_benchmark <- read.table("brute-force/brute_force_comparison.txt", header=TRUE)
+all <- read.table("benchmark_solvers.txt", header=TRUE)
+brute_benchmark <- read.table("brute_force_comparison.txt", header=TRUE)
 
 benchmark_180s <- read.table("benchmark_180s.txt", header=TRUE)
 benchmark_360s <- read.table("benchmark_360s.txt", header=TRUE)
