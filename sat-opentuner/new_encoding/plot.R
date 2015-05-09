@@ -15,7 +15,7 @@ theme_set(theme_bw(base_size = 10) + theme(legend.position = "bottom",
                                           legend.key.size = unit(0.14, "in"),
                                           axis.text = element_text(size = rel(0.75)),
                                           axis.text.x = element_text(angle = 30, hjust=1),
-                                          text = element_text(family="Times"))) 
+                                          text = element_text(family="Times")))
 
 all <- read.table("benchmark_solvers.txt", header=TRUE)
 brute_benchmark <- read.table("brute_force_comparison.txt", header=TRUE)
