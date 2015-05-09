@@ -10,10 +10,10 @@ library(grid)
 #brute_force <- read.table("brute-force/benchmark_0.txt", header=TRUE)
 #
 
-theme_set(theme_bw(base_size = 10) + theme(legend.position = "bottom",
-                                          legend.text = element_text(size = rel(0.75)),
+theme_set(theme_bw(base_size = 15) + theme(legend.position = "bottom",
+                                          legend.text = element_text(size = rel(0.7)),
                                           legend.key.size = unit(0.14, "in"),
-                                          axis.text = element_text(size = rel(0.75)),
+                                          axis.text = element_text(size = rel(0.68)),
                                           axis.text.x = element_text(angle = 30, hjust=1),
                                           text = element_text(family="Times")))
 
@@ -68,15 +68,15 @@ brute_benchmark_graph <- ggplot(data=melt(brute_benchmark), aes(x=variable,y=val
 ggsave(file="brute.png",width=2.8,height=2.8,scale=2)
 
 brute_tuned_benchmark_graph <- ggplot(data=melt(brute_tuned_benchmark), aes(x=variable,y=value,colour=variable,fill=variable)) +
-    stat_summary(fun.y=mean, geom="point", size=1.7) +
+    stat_summary(fun.y=mean, geom="point", size=2) +
     stat_summary(fun.data=mean_cl_boot, position=position_dodge(width=0.95), geom="errorbar", aes(width=0.2)) +
 #    stat_summary(fun.ymin=min, fun.ymax=max, position=position_dodge(width=0.95), geom="errorbar", aes(width=0.2)) +
 #    theme(axis.text.x=element_blank()) +
-    guides(colour=guide_legend(title="", nrow=2, byrow=TRUE)) +
+    guides(colour=guide_legend(title="", nrow=3, byrow=TRUE)) +
     guides(fill=guide_legend(title="")) +
     xlab("Resolvedores") +
-    ylab("Tempo de Execução (segundos)") +
-    ggtitle("Desempenho dos Resolvedores e Combinações")
+    ylab("Tempo de Execução (segundos)")
+#    ggtitle("")
     
 
 ggsave(file="brute_tuned.png",width=2.8,height=2.8,scale=2)
